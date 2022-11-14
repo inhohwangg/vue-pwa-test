@@ -9,6 +9,7 @@ import Post from "./Post.vue";
 export default {
   props: {
     postdata: Array,
+    //
   },
   components: {
     Post,
