@@ -9,7 +9,7 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container :postdata="postdata" />
+  <Container :postdata="postdata" :step="step" />
   <button @click="getdata(e)">더보기</button>
 
   <div class="footer">
@@ -18,6 +18,13 @@
       <label for="file" class="input-plus">+</label>
     </ul>
   </div>
+
+  <!-- <div v-if="content === 0">내용0</div>
+  <div v-if="content === 1">내용1</div>
+  <div v-if="content === 2">내용2</div>
+  <button @click="content = 0">버튼0</button>
+  <button @click="content = 1">버튼1</button>
+  <button @click="content = 2">버튼2</button> -->
 </template>
 
 <script>
@@ -29,8 +36,8 @@ export default {
   name: "App",
   data() {
     return {
+      step: 1,
       postdata,
-      count: 0,
     };
   },
   components: { Container },
