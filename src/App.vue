@@ -4,17 +4,29 @@
       <li>Cancel</li>
     </ul>
     <ul class="header-button-right">
-      <li>Next</li>
+      <li v-if="step === 1" @click="step++">Next</li>
+      <li v-if="step === 2" @click="publish">발행</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container :postdata="postdata" :step="step" />
+  <Container
+    :postdata="postdata"
+    :step="step"
+    :urldata="urldata"
+    @write="postWrite = $event"
+  />
   <button @click="getdata(e)">더보기</button>
 
   <div class="footer">
     <ul class="footer-button-plus">
-      <input type="file" id="file" class="inputfile" />
+      <input
+        @change="upload"
+        multiple
+        type="file"
+        id="file"
+        class="inputfile"
+      />
       <label for="file" class="input-plus">+</label>
     </ul>
   </div>
@@ -36,12 +48,42 @@ export default {
   name: "App",
   data() {
     return {
-      step: 1,
+      step: 0,
       postdata,
+      urldata: "",
+      postWrite: "",
+      firedata: "",
     };
   },
   components: { Container },
+  mounted() {
+    this.emitter.on("createValue", (a) => {
+      this.firedata = a;
+    });
+  },
   methods: {
+    publish() {
+      let newPost = {
+        name: "Kim Hyun",
+        userImage: "https://placeimg.com/100/100/arch",
+        postImage: this.urldata,
+        likes: 36,
+        date: "May 15",
+        liked: false,
+        content: this.postWrite,
+        filter: this.firedata,
+      };
+      this.postdata.unshift(newPost);
+      this.step = 0;
+    },
+    upload(e) {
+      let file = e.target.files;
+      console.log(file[0]);
+      let url = URL.createObjectURL(file[0]);
+      this.urldata = url;
+      console.info(this.urldata);
+      this.step++;
+    },
     getdata() {
       // 나의 풀이
       // this.count++;

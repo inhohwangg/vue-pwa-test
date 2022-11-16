@@ -5,21 +5,32 @@
     </div>
     <!-- 필터선택페이지 -->
     <div v-if="step === 1">
-      <div class="upload-image"></div>
+      <div
+        class="upload-image"
+        :class="firedata"
+        :style="{ backgroundImage: `url(${urldata})` }"
+      ></div>
       <div class="filters">
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
+        <FilterBox v-for="a in instfilter" :key="a" :urldata="urldata" :a="a">{{
+          a
+        }}</FilterBox>
       </div>
     </div>
 
     <!-- 글작성페이지 -->
     <div v-if="step === 2">
-      <div class="upload-image"></div>
+      <div
+        class="upload-image"
+        :class="firedata"
+        :style="{ backgroundImage: `url(${urldata})` }"
+      ></div>
       <div class="write">
-        <textarea class="write-box">write!</textarea>
+        <textarea
+          @input="$emit('write', $event.target.value)"
+          class="write-box"
+        >
+write!</textarea
+        >
       </div>
     </div>
   </div>
@@ -27,14 +38,55 @@
 
 <script>
 import Post from "./Post.vue";
+import FilterBox from "./FilterBox.vue";
 export default {
+  data() {
+    return {
+      instfilter: [
+        "aden",
+        "_1977",
+        "brannan",
+        "brooklyn",
+        "clarendon",
+        "earlybird",
+        "gingham",
+        "hudson",
+        "inkwell",
+        "kelvin",
+        "lark",
+        "lofi",
+        "maven",
+        "mayfair",
+        "moon",
+        "nashville",
+        "perpetua",
+        "reyes",
+        "rise",
+        "slumber",
+        "stinson",
+        "toaster",
+        "valencia",
+        "walden",
+        "willow",
+        "xpro2",
+      ],
+      firedata: "",
+    };
+  },
   props: {
     postdata: Array,
     step: Number,
+    urldata: String,
     //
+  },
+  mounted() {
+    this.emitter.on("createValue", (a) => {
+      this.firedata = a;
+    });
   },
   components: {
     Post,
+    FilterBox,
   },
 };
 </script>
