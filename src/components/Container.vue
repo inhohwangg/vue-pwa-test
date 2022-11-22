@@ -1,7 +1,13 @@
 <template>
   <div>
     <div v-if="step === 0">
-      <Post :postdata="postdata[i]" v-for="(a, i) in postdata" :key="i" />
+      <Post
+        :postdata="postdata[i]"
+        :idx="i"
+        v-for="(a, i) in postdata"
+        :key="i"
+        @click="$store.commit('likesAdd')"
+      />
     </div>
     <!-- 필터선택페이지 -->
     <div v-if="step === 1">
@@ -33,12 +39,17 @@ write!</textarea
         >
       </div>
     </div>
+
+    <div v-if="step === 3">
+      <Mypage />
+    </div>
   </div>
 </template>
 
 <script>
 import Post from "./Post.vue";
 import FilterBox from "./FilterBox.vue";
+import Mypage from "./Mypage.vue";
 export default {
   data() {
     return {
@@ -71,6 +82,7 @@ export default {
         "xpro2",
       ],
       firedata: "",
+      idx: 0,
     };
   },
   props: {
@@ -87,6 +99,7 @@ export default {
   components: {
     Post,
     FilterBox,
+    Mypage,
   },
 };
 </script>

@@ -10,14 +10,12 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-
   <Container
     :postdata="postdata"
     :step="step"
     :urldata="urldata"
     @write="postWrite = $event"
   />
-  <button @click="getdata(e)">더보기</button>
 
   <div class="footer">
     <ul class="footer-button-plus">
@@ -44,6 +42,7 @@
 import Container from "./components/Container.vue";
 import postdata from "./assets/data";
 import axios from "axios";
+import { mapState } from "vuex";
 
 export default {
   name: "App",
@@ -57,6 +56,10 @@ export default {
     };
   },
   components: { Container },
+  computed: {
+    ...mapState([""]),
+    ...mapState({}),
+  },
   mounted() {
     this.emitter.on("createValue", (a) => {
       this.firedata = a;

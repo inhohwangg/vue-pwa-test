@@ -10,9 +10,10 @@
     <div
       class="post-body"
       :style="{ backgroundImage: `url(${postdata.postImage})` }"
+      @click="$store.commit('likesAdd', idx)"
     ></div>
     <div class="post-content">
-      <p>{{ postdata.likes }} Likes</p>
+      <p>{{ $store.state.likes[idx] }} Likes</p>
       <p>
         <strong>{{ postdata.name }}</strong> {{ postdata.content }}
       </p>
@@ -25,6 +26,7 @@
 export default {
   props: {
     postdata: Array,
+    idx: Number,
   },
 };
 </script>
