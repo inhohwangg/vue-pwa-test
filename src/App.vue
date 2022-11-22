@@ -10,6 +10,7 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
+
   <Container
     :postdata="postdata"
     :step="step"
