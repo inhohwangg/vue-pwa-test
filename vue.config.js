@@ -1,6 +1,3 @@
-const { defineConfig } = require("@vue/cli-service");
-module.exports = defineConfig({
+module.exports = {
   publicPath: "/vue-pwa-test",
-  transpileDependencies: true,
-  lintOnSave: false,
-});
+};
