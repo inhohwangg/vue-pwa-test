@@ -1,13 +1,13 @@
 const { defineConfig } = require("@vue/cli-service");
 module.exports = defineConfig({
+  publicPath: "/vue-pwa-test",
+  outputDir: "docs",
   pwa: {
-    name: "인호vue",
+    name: "vue",
     themeColor: "#4DBA87",
     msTileColor: "#000000",
     workboxOptions: { exclude: [/\.map$/, /manifest\.json$/, "index.html"] },
   },
-  publicPath: "/vue-pwa-test",
-  outputDir: "docs",
   transpileDependencies: true,
   lintOnSave: false,
 });
