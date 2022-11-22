@@ -7,6 +7,7 @@ module.exports = defineConfig({
     workboxOptions: { exclude: [/\.map$/, /manifest\.json$/, "index.html"] },
   },
   publicPath: "/vue-pwa-test",
+  outputDir: "docs",
   transpileDependencies: true,
   lintOnSave: false,
 });
